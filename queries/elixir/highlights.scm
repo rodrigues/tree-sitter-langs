@@ -168,8 +168,8 @@
 
 ; * unused
 (
-  (identifier) @comment.unused
-  (#match? @comment.unused "^_")
+  (identifier) @noise
+  (#match? @noise "^_")
 )
 
 ; * regular
