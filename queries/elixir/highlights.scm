@@ -133,31 +133,62 @@
   ]
   (arguments (_)*))
 
-; * just identifier in function definition
+; * function definition
 (call
   target: (identifier) @keyword
-  (arguments
-    [
-      (identifier) @function
-      (binary_operator
-        left: (identifier) @function
-        operator: "when")
-    ])
-  (#match? @keyword "^(def|defdelegate|defguard|defguardp|defmacro|defmacrop|defn|defnp|defp)$"))
-
-; * pipe into identifier (definition)
-(call
-  target: (identifier) @keyword
-  (arguments
+  (arguments [
+    (identifier) @function
+    (call
+      target: (identifier) @function)
     (binary_operator
-      operator: "|>"
-      right: (identifier) @variable))
-  (#match? @keyword "^(def|defdelegate|defguard|defguardp|defmacro|defmacrop|defn|defnp|defp)$"))
+      left: (call
+              target: (identifier) @function)
+      operator: "when")
+  ])
+  (#match? @keyword "^(def|defdelegate|defn|defnp|defp)$"))
 
-; * pipe into identifier (function call)
-(binary_operator
-  operator: "|>"
-  right: (identifier) @function.call)
+; * macro function definition
+(call
+  target: (identifier) @keyword
+  (arguments [
+    (identifier) @function.macro
+    (call
+      target: (identifier) @function.macro)
+    (binary_operator
+      left: (call
+              target: (identifier) @function.macro)
+      operator: "when")
+   ])
+  (#match? @keyword "^(defguard|defguardp|defmacro|defmacrop)$"))
+
+; * variable parameter definition in def*
+(call
+  target: (identifier) @keyword
+  (arguments [
+    (call
+      target: (identifier)
+      (arguments ((_)* @variable.parameter)))
+    (binary_operator
+      left: (call
+              target: (identifier)
+              (arguments ((_)* @variable.parameter)))
+      operator: "when")
+   ])
+  (#match? @keyword "^(def|defdelegate|defn|defnp|defp|defguard|defguardp|defmacro|defmacrop)$"))
+
+;; ; * pipe into identifier (function call)
+;; (binary_operator
+;;   operator: "|>"
+;;   right: (identifier) @function.call)
+
+;; ; * pipe into identifier (definition)
+;; (call
+;;   target: (identifier) @keyword
+;;   (arguments
+;;     (binary_operator
+;;       operator: "|>"
+;;       right: (identifier) @variable))
+;;   (#match? @keyword "^(def|defdelegate|defguard|defguardp|defmacro|defmacrop|defn|defnp|defp)$"))
 
 ; Identifiers
 
