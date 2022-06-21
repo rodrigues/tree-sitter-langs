@@ -173,7 +173,8 @@
 )
 
 ; * regular
-(identifier) @variable
+;; not for usage, @variable should be for declaration (a = something, %{x: a} = something), and param
+;;(identifier) @variable
 
 ; Comment
 
