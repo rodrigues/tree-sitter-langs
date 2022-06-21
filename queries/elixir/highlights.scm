@@ -48,7 +48,7 @@
   operator: _ @operator)
 
 (dot
-  operator: _ @operator)
+  operator: _ @punctuation.delimiter)
 
 (stab_clause
   operator: _ @operator)
