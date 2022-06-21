@@ -42,6 +42,9 @@
   operator: _ @operator)
 
 (binary_operator
+  operator: "::" @punctuation.delimiter)
+
+(binary_operator
   operator: _ @operator)
 
 (dot
