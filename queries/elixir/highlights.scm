@@ -129,8 +129,9 @@
     (identifier) @function.builtin
     ; remote
     (dot
-      right: (identifier) @function)
-  ])
+      right: (identifier) @function.call)
+  ]
+  (arguments (_)*))
 
 ; * just identifier in function definition
 (call
