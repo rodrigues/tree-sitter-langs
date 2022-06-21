@@ -77,14 +77,14 @@
 
 (interpolation "#{" @punctuation.special "}" @punctuation.special) @embedded
 
-(escape_sequence) @string.escape
+(escape_sequence) @escape
 
 [
   (atom)
   (quoted_atom)
   (keyword)
   (quoted_keyword)
-] @string.special.symbol
+] @constant
 
 [
   (string)
@@ -101,9 +101,9 @@
 
 (sigil
   (sigil_name) @__name__
-  quoted_start: _ @string.regex
-  quoted_end: _ @string.regex
-  (#match? @__name__ "^[rR]$")) @string.regex
+  quoted_start: _ @string.special
+  quoted_end: _ @string.special
+  (#match? @__name__ "^[rR]$")) @string.special
 
 (sigil
   (sigil_name) @__name__
