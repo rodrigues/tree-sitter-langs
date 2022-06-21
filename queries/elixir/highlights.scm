@@ -126,7 +126,7 @@
 (call
   target: [
     ; local
-    (identifier) @function
+    (identifier) @function.builtin
     ; remote
     (dot
       right: (identifier) @function)
