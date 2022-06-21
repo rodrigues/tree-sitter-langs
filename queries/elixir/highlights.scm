@@ -156,7 +156,7 @@
 ; * pipe into identifier (function call)
 (binary_operator
   operator: "|>"
-  right: (identifier) @function)
+  right: (identifier) @function.call)
 
 ; Identifiers
 
