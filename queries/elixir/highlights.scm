@@ -151,17 +151,13 @@
    ])
   (#match? @keyword "^(defguard|defguardp|defmacro|defmacrop)$"))
 
-; * variable parameter definition in def*
+; * variable parameter definition in def
 (call
   target: (identifier) @keyword
   (arguments [
-    (call
-      target: (identifier)
-      (arguments ((_)* @variable.parameter)))
+    (call (arguments (_)? @variable.parameter))
     (binary_operator
-      left: (call
-              target: (identifier)
-              (arguments ((_)* @variable.parameter)))
+      left: (call (arguments (_)? @variable.parameter))
       operator: "when")
    ])
   (#match? @keyword "^(def|defdelegate|defn|defnp|defp|defguard|defguardp|defmacro|defmacrop)$"))
