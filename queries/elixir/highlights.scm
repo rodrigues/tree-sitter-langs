@@ -122,16 +122,6 @@
   target: (identifier) @keyword
   (#match? @keyword "^(alias|case|cond|else|for|if|import|quote|raise|receive|require|reraise|super|throw|try|unless|unquote|unquote_splicing|use|with)$"))
 
-; * function call
-(call
-  target: [
-    ; local
-    (identifier) @function.builtin
-    ; remote
-    (dot
-      right: (identifier) @function.call)
-  ]
-  (arguments (_)*))
 
 ; * function definition
 (call
@@ -176,6 +166,16 @@
    ])
   (#match? @keyword "^(def|defdelegate|defn|defnp|defp|defguard|defguardp|defmacro|defmacrop)$"))
 
+; * function call
+(call
+  target: [
+    ; local
+    (identifier) @function.builtin
+    ; remote
+    (dot
+      right: (identifier) @function.call)
+  ]
+  (arguments (_)*))
 ;; ; * pipe into identifier (function call)
 ;; (binary_operator
 ;;   operator: "|>"
