@@ -166,6 +166,11 @@
    ])
   (#match? @keyword "^(def|defdelegate|defn|defnp|defp|defguard|defguardp|defmacro|defmacrop)$"))
 
+; variable binding
+(binary_operator
+ left: (identifier) @variable
+ operator: "=")
+
 ; * function call
 (call
   target: [
